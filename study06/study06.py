@@ -134,3 +134,104 @@ print(f"共计比赛{count}次")
 print(f"A赢了{count_a}次，B赢了{count_b}次!")
 """
 
+#题目
+
+
+str1 = '''
+熊宁
+杰益
+
+王伟伟
+
+青芳
+
+玉琴
+焦候涛
+莫福
+杨高旺
+唐欢欢
+韩旭
+'''
+
+str2 = '''
+焦候涛 
+熊宁 
+玉琴 
+
+骆龙 
+
+韩旭 
+杨高旺
+
+杰益  
+
+莫福  
+
+伟伟
+
+李福
+'''
+
+count = 0
+list_name_temp = []
+#先记录所有同时存在的名字
+for i in str1.splitlines() :
+    if i == '' :
+        continue
+    else :
+        i = i.strip()       #手动去掉空格!!!!!!!!!!!!!!
+    for j in str2.splitlines() :
+        if j == '' :
+            continue
+        else :
+            j = j.strip()   #去掉空格!!!!!!!!!!!!!!!!
+        #print(f"i = {i} j = {j}")
+        if (i == j) and (i != '') and (j != '') :
+            list_name_temp.append(i)
+            count+=1
+print(f"count = {count}")
+#再剔除掉公有的就行
+only_str1 = []
+for i in str1.splitlines() :
+    flag = 0          #用来判断是否找到了
+    i = i.strip()
+    for j in list_name_temp :
+        j = j.strip()
+        if i == j :
+            flag = 1
+            break
+    if flag == 1 :  #找到了就不打印
+        continue
+    elif i != '' :
+        only_str1.append(i)
+
+#再剔除掉公有的就行
+only_str2 = []
+for i in str2.splitlines() :
+    i = i.strip()
+    flag = 0          #用来判断是否找到了
+    for j in list_name_temp :
+        j = j.strip()
+        if i == j :
+            flag = 1
+            break
+    if flag == 1 :  #找到了就不打印
+        continue
+    elif i != '' :
+        only_str2.append(i)
+
+str_temp = ''
+for i in list_name_temp :
+    str_temp = str_temp + "、" + i
+print("公有的人有:" + str_temp)
+
+str_temp = ''
+for i in only_str1 :
+    str_temp = str_temp + "、" + i
+print("仅Str1存在的人有:" + str_temp)
+
+str_temp = ''
+for i in only_str2 :
+    str_temp = str_temp + "、" + i
+print("仅Str2存在的人有:" + str_temp)
+
